@@ -1,5 +1,13 @@
 ###################
-What is CodeIgniter
+Workshop CI 01 - Web Application Development
+###################
+- `Basic CodeIgniter + HMVC`_
+- `Template + AdminLTE`_
+- `CRUD + Ajax`_
+- `Web Services: REST & SOAP Client`
+
+###################
+About CodeIgniter
 ###################
 
 CodeIgniter is an Application Development Framework - a toolkit - for people
