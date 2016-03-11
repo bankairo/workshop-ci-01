@@ -1,10 +1,19 @@
 ###################
 Workshop CI 01 - Web Application Development
 ###################
-- `Basic CodeIgniter + HMVC`_
-- `Template + AdminLTE`_
-- `CRUD + Ajax`_
+- `Basic CodeIgniter + HMVC`
+- `Template + AdminLTE`
+- `CRUD + Ajax`
 - `Web Services: REST & SOAP Client`
+
+*******************
+Credit
+*******************
+- HMVC Module ( https://bitbucket.org/wiredesignz/codeigniter-modular-extensions-hmvc/downloads )
+- AdminLTE ( https://almsaeedstudio.com/ )
+- Public Data from forlap.dikti.go.id
+- WSO2 DSS ( http://wso2.com/products/data-services-server/ )
+- WSO2 ESB ( wso2.com/products/enterprise-service-bus/ )
 
 ###################
 About CodeIgniter
