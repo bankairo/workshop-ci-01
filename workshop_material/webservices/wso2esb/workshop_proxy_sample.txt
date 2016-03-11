@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<proxy xmlns="http://ws.apache.org/ns/synapse"
+name="workshop"
+transports="https"
+statistics="disable"
+trace="disable"
+startOnLoad="true">
+	<target>
+		<inSequence>
+			<property name="IN_ACCEPT_HEADER" expression="$trp:Format_data"/>
+		</inSequence>
+		<outSequence>
+			<log level="custom">
+				<property name="IN_ACCEPT_HEADER" expression="get-property('IN_ACCEPT_HEADER')"/>
+			</log>
+			<switch source="get-property('IN_ACCEPT_HEADER')">
+				<case regex="json">
+					<log level="custom">
+						<property name="LOGNYA" expression="get-property('IN_ACCEPT_HEADER')"/>
+					</log>
+					<property name="messageType"
+					value="application/json"
+					scope="axis2"
+					type="STRING"/>
+				</case>
+			<default>
+				<property name="messageType" value="application/xml" scope="axis2"/>
+			</default>
+			</switch>
+			<send/>
+		</outSequence>
+		<endpoint>
+			<address uri="https://localhost:9444/services/workshop"/>
+		</endpoint>
+	</target>
+	<publishWSDL uri="https://localhost:9444/services/workshop?wsdl"/>
+	<parameter name="disableREST">false</parameter>
+	<parameter name="ScenarioID">scenario1</parameter>
+	<enableSec/>
+	<policy key="conf:/repository/axis2/service-groups/workshop/services/workshop/policies/UTOverTransport"/>
+	<description/>
+</proxy>

@@ -1,0 +1,150 @@
+<data name="workshop" serviceNamespace="http://mhs.my.id" transports="http https local">
+   <description>Service Workshop Web Application Development</description>
+   <config id="workshop">
+      <property name="driverClassName">com.mysql.jdbc.Driver</property>
+      <property name="url">jdbc:mysql://localhost:3326/workshop</property>
+      <property name="username">workshop</property>
+      <property name="password">workshop</property>
+   </config>
+   <query id="qry_get_pt_by_kode" useConfig="workshop">
+      <sql>SELECT id, kode_pt, nama_pt, propinsi, status FROM tmst_pt WHERE kode_pt = :kode_pt</sql>
+      <result element="PTList" rowName="PTRow">
+         <element column="id" name="id" xsdType="string"/>
+         <element column="kode_pt" name="kode_pt" xsdType="string"/>
+         <element column="nama_pt" name="nama_pt" xsdType="string"/>
+         <element column="propinsi" name="propinsi" xsdType="string"/>
+         <element column="status" name="status" xsdType="string"/>
+      </result>
+      <param name="kode_pt" sqlType="STRING"/>
+   </query>
+   <query id="qry_person_add" keyColumns="id" returnGeneratedKeys="true" useConfig="workshop">
+      <sql>INSERT INTO persons (firstName, lastName, gender, address, dob) VALUES (:firstName, :lastName, :gender, :address, :dob)</sql>
+      <result element="PersonAddID" rowName="PersonID" useColumnNumbers="true">
+         <element column="1" name="ID" xsdType="integer"/>
+      </result>
+      <param name="firstName" sqlType="STRING"/>
+      <param name="lastName" sqlType="STRING"/>
+      <param name="gender" sqlType="STRING"/>
+      <param name="address" sqlType="STRING"/>
+      <param name="dob" sqlType="STRING"/>
+   </query>
+   <query id="qry_person_update" useConfig="workshop">
+      <sql>UPDATE persons SET firstName = :firstName, lastName = :lastName, gender = :gender, address = :address, dob = :dob WHERE id = :id</sql>
+      <param name="firstName" sqlType="STRING"/>
+      <param name="lastName" sqlType="STRING"/>
+      <param name="gender" sqlType="STRING"/>
+      <param name="address" sqlType="STRING"/>
+      <param name="dob" sqlType="STRING"/>
+      <param name="id" sqlType="STRING"/>
+   </query>
+   <query id="qry_person_delete" useConfig="workshop">
+      <sql>DELETE FROM persons WHERE id = :id</sql>
+      <param name="id" sqlType="STRING"/>
+   </query>
+   <query id="qry_person_list" useConfig="workshop">
+      <sql>SELECT :search search, :page page, :offset offset FROM DUAL</sql>
+      <result element="PersonListParams" rowName="PersonListParam">
+         <element column="search" name="search" xsdType="string"/>
+         <element column="page" name="page" xsdType="integer"/>
+         <element column="offset" name="offset" xsdType="integer"/>
+         <call-query href="qry_person_list_count" requiredRoles="">
+            <with-param column="search" name="search"/>
+         </call-query>
+         <call-query href="qry_person_list_data" requiredRoles="">
+            <with-param column="search" name="search"/>
+            <with-param column="page" name="page"/>
+            <with-param column="offset" name="offset"/>
+         </call-query>
+      </result>
+      <param name="search" sqlType="STRING"/>
+      <param name="page" sqlType="INTEGER"/>
+      <param name="offset" sqlType="INTEGER"/>
+   </query>
+   <query id="qry_person_list_count" useConfig="workshop">
+      <sql>SELECT count(*) data_count FROM persons WHERE firstName like :search</sql>
+      <result element="PersonListCounts" rowName="PersonListCount">
+         <element column="data_count" name="data_count" xsdType="integer"/>
+      </result>
+      <param name="search" sqlType="STRING"/>
+   </query>
+   <query id="qry_person_list_data" useConfig="workshop">
+      <sql>SELECT id, firstName, lastName, gender, address, DATE_FORMAT(dob,'%Y-%m-%d') dob FROM persons WHERE firstName like :search LIMIT :page, :offset</sql>
+      <result element="PersonListDatas" rowName="PersonListData">
+         <element column="id" name="id" xsdType="string"/>
+         <element column="firstName" name="firstName" xsdType="string"/>
+         <element column="lastName" name="lastName" xsdType="string"/>
+         <element column="gender" name="gender" xsdType="string"/>
+         <element column="address" name="address" xsdType="string"/>
+         <element column="dob" name="dob" xsdType="string"/>
+      </result>
+      <param name="search" sqlType="STRING"/>
+      <param name="page" sqlType="INTEGER"/>
+      <param name="offset" sqlType="INTEGER"/>
+   </query>
+   <query id="qry_person_view_by_id" useConfig="workshop">
+      <sql>SELECT id, firstName, lastName, gender, address, DATE_FORMAT(dob,'%Y-%m-%d') dob FROM persons WHERE id = :id</sql>
+      <result element="PersonViews" rowName="PersonView">
+         <element column="id" name="id" xsdType="string"/>
+         <element column="firstName" name="firstName" xsdType="string"/>
+         <element column="lastName" name="lastName" xsdType="string"/>
+         <element column="gender" name="gender" xsdType="string"/>
+         <element column="address" name="address" xsdType="string"/>
+         <element column="dob" name="dob" xsdType="string"/>
+      </result>
+      <param name="id" sqlType="STRING"/>
+   </query>
+   <operation name="get_pt_by_kode">
+      <description>Get PT by Kode PT</description>
+      <call-query href="qry_get_pt_by_kode">
+         <with-param name="kode_pt" query-param="kode_pt"/>
+      </call-query>
+   </operation>
+   <operation name="person_add">
+      <call-query href="qry_person_add">
+         <with-param name="firstName" query-param="firstName"/>
+         <with-param name="lastName" query-param="lastName"/>
+         <with-param name="gender" query-param="gender"/>
+         <with-param name="address" query-param="address"/>
+         <with-param name="dob" query-param="dob"/>
+      </call-query>
+   </operation>
+   <operation name="person_update" returnRequestStatus="true">
+      <call-query href="qry_person_update">
+         <with-param name="firstName" query-param="firstName"/>
+         <with-param name="lastName" query-param="lastName"/>
+         <with-param name="gender" query-param="gender"/>
+         <with-param name="address" query-param="address"/>
+         <with-param name="dob" query-param="dob"/>
+         <with-param name="id" query-param="id"/>
+      </call-query>
+   </operation>
+   <operation name="person_delete" returnRequestStatus="true">
+      <call-query href="qry_person_delete">
+         <with-param name="id" query-param="id"/>
+      </call-query>
+   </operation>
+   <operation name="person_list">
+      <call-query href="qry_person_list">
+         <with-param name="search" query-param="search"/>
+         <with-param name="page" query-param="page"/>
+         <with-param name="offset" query-param="offset"/>
+      </call-query>
+   </operation>
+   <operation name="person_list_count">
+      <call-query href="qry_person_list_count">
+         <with-param name="search" query-param="search"/>
+      </call-query>
+   </operation>
+   <operation name="person_list_search">
+      <call-query href="qry_person_list_data">
+         <with-param name="search" query-param="search"/>
+         <with-param name="page" query-param="page"/>
+         <with-param name="offset" query-param="offset"/>
+      </call-query>
+   </operation>
+   <operation name="person_view_by_id">
+      <call-query href="qry_person_view_by_id">
+         <with-param name="id" query-param="id"/>
+      </call-query>
+   </operation>
+</data>
