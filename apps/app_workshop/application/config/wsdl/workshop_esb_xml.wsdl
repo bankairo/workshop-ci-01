@@ -1,0 +1,609 @@
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:ns1="http://ws.wso2.org/dataservice" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:ns0="http://ws.unlam.ac.id" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://ws.unlam.ac.id">
+   <wsp:Policy xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" wsu:Id="UTOverTransport">
+      <wsp:ExactlyOne>
+         <wsp:All>
+            <sp:TransportBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+               <wsp:Policy>
+                  <sp:TransportToken>
+                     <wsp:Policy>
+                        <sp:HttpsToken RequireClientCertificate="false"></sp:HttpsToken>
+                     </wsp:Policy>
+                  </sp:TransportToken>
+                  <sp:AlgorithmSuite>
+                     <wsp:Policy>
+                        <sp:Basic256></sp:Basic256>
+                     </wsp:Policy>
+                  </sp:AlgorithmSuite>
+                  <sp:Layout>
+                     <wsp:Policy>
+                        <sp:Lax></sp:Lax>
+                     </wsp:Policy>
+                  </sp:Layout>
+                  <sp:IncludeTimestamp></sp:IncludeTimestamp>
+               </wsp:Policy>
+            </sp:TransportBinding>
+            <sp:SignedSupportingTokens xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+               <wsp:Policy>
+                  <sp:UsernameToken sp:IncludeToken="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy/IncludeToken/AlwaysToRecipient"></sp:UsernameToken>
+               </wsp:Policy>
+            </sp:SignedSupportingTokens>
+         </wsp:All>
+      </wsp:ExactlyOne>
+   </wsp:Policy>
+   <wsdl:documentation>Service Workshop
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                </wsdl:documentation>
+   <wsdl:types>
+      <xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://ws.unlam.ac.id">
+         <xs:element name="person_delete">
+            <xs:complexType>
+               <xs:sequence>
+                  <xs:element name="id" nillable="true" type="xs:string"></xs:element>
+               </xs:sequence>
+            </xs:complexType>
+         </xs:element>
+         <xs:element name="person_update">
+            <xs:complexType>
+               <xs:sequence>
+                  <xs:element name="firstName" nillable="true" type="xs:string"></xs:element>
+                  <xs:element name="lastName" nillable="true" type="xs:string"></xs:element>
+                  <xs:element name="gender" nillable="true" type="xs:string"></xs:element>
+                  <xs:element name="address" nillable="true" type="xs:string"></xs:element>
+                  <xs:element name="dob" nillable="true" type="xs:string"></xs:element>
+                  <xs:element name="id" nillable="true" type="xs:string"></xs:element>
+               </xs:sequence>
+            </xs:complexType>
+         </xs:element>
+         <xs:element name="get_pt_by_kode">
+            <xs:complexType>
+               <xs:sequence>
+                  <xs:element name="kode_pt" nillable="true" type="xs:string"></xs:element>
+               </xs:sequence>
+            </xs:complexType>
+         </xs:element>
+         <xs:element name="PTList" type="ns0:PTList"></xs:element>
+         <xs:complexType name="PTList">
+            <xs:sequence>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="PTRow" type="ns0:PTRow"></xs:element>
+            </xs:sequence>
+         </xs:complexType>
+         <xs:complexType name="PTRow">
+            <xs:sequence>
+               <xs:element name="id" nillable="true" type="xs:string"></xs:element>
+               <xs:element name="kode_pt" nillable="true" type="xs:string"></xs:element>
+               <xs:element name="nama_pt" nillable="true" type="xs:string"></xs:element>
+               <xs:element name="propinsi" nillable="true" type="xs:string"></xs:element>
+               <xs:element name="status" nillable="true" type="xs:string"></xs:element>
+            </xs:sequence>
+         </xs:complexType>
+         <xs:element name="person_view_by_id">
+            <xs:complexType>
+               <xs:sequence>
+                  <xs:element name="id" nillable="true" type="xs:string"></xs:element>
+               </xs:sequence>
+            </xs:complexType>
+         </xs:element>
+         <xs:element name="PersonViews" type="ns0:PersonViews"></xs:element>
+         <xs:complexType name="PersonViews">
+            <xs:sequence>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="PersonView" type="ns0:PersonView"></xs:element>
+            </xs:sequence>
+         </xs:complexType>
+         <xs:complexType name="PersonView">
+            <xs:sequence>
+               <xs:element name="id" nillable="true" type="xs:string"></xs:element>
+               <xs:element name="firstName" nillable="true" type="xs:string"></xs:element>
+               <xs:element name="lastName" nillable="true" type="xs:string"></xs:element>
+               <xs:element name="gender" nillable="true" type="xs:string"></xs:element>
+               <xs:element name="address" nillable="true" type="xs:string"></xs:element>
+               <xs:element name="dob" nillable="true" type="xs:string"></xs:element>
+            </xs:sequence>
+         </xs:complexType>
+         <xs:element name="person_list_count">
+            <xs:complexType>
+               <xs:sequence>
+                  <xs:element name="search" nillable="true" type="xs:string"></xs:element>
+               </xs:sequence>
+            </xs:complexType>
+         </xs:element>
+         <xs:element name="PersonListCounts" type="ns0:PersonListCounts"></xs:element>
+         <xs:complexType name="PersonListCounts">
+            <xs:sequence>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="PersonListCount" type="ns0:PersonListCount"></xs:element>
+            </xs:sequence>
+         </xs:complexType>
+         <xs:complexType name="PersonListCount">
+            <xs:sequence>
+               <xs:element name="data_count" nillable="true" type="xs:integer"></xs:element>
+            </xs:sequence>
+         </xs:complexType>
+         <xs:element name="person_list_search">
+            <xs:complexType>
+               <xs:sequence>
+                  <xs:element name="search" nillable="true" type="xs:string"></xs:element>
+                  <xs:element name="page" nillable="true" type="xs:int"></xs:element>
+                  <xs:element name="offset" nillable="true" type="xs:int"></xs:element>
+               </xs:sequence>
+            </xs:complexType>
+         </xs:element>
+         <xs:element name="PersonListDatas" type="ns0:PersonListDatas"></xs:element>
+         <xs:complexType name="PersonListDatas">
+            <xs:sequence>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="PersonListData" type="ns0:PersonListData"></xs:element>
+            </xs:sequence>
+         </xs:complexType>
+         <xs:complexType name="PersonListData">
+            <xs:sequence>
+               <xs:element name="id" nillable="true" type="xs:string"></xs:element>
+               <xs:element name="firstName" nillable="true" type="xs:string"></xs:element>
+               <xs:element name="lastName" nillable="true" type="xs:string"></xs:element>
+               <xs:element name="gender" nillable="true" type="xs:string"></xs:element>
+               <xs:element name="address" nillable="true" type="xs:string"></xs:element>
+               <xs:element name="dob" nillable="true" type="xs:string"></xs:element>
+            </xs:sequence>
+         </xs:complexType>
+         <xs:element name="person_add">
+            <xs:complexType>
+               <xs:sequence>
+                  <xs:element name="firstName" nillable="true" type="xs:string"></xs:element>
+                  <xs:element name="lastName" nillable="true" type="xs:string"></xs:element>
+                  <xs:element name="gender" nillable="true" type="xs:string"></xs:element>
+                  <xs:element name="address" nillable="true" type="xs:string"></xs:element>
+                  <xs:element name="dob" nillable="true" type="xs:string"></xs:element>
+               </xs:sequence>
+            </xs:complexType>
+         </xs:element>
+         <xs:element name="PersonAddID" type="ns0:PersonAddID"></xs:element>
+         <xs:complexType name="PersonAddID">
+            <xs:sequence>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="PersonID" type="ns0:PersonID"></xs:element>
+            </xs:sequence>
+         </xs:complexType>
+         <xs:complexType name="PersonID">
+            <xs:sequence>
+               <xs:element name="ID" nillable="true" type="xs:integer"></xs:element>
+            </xs:sequence>
+         </xs:complexType>
+         <xs:element name="person_list">
+            <xs:complexType>
+               <xs:sequence>
+                  <xs:element name="search" nillable="true" type="xs:string"></xs:element>
+                  <xs:element name="page" nillable="true" type="xs:int"></xs:element>
+                  <xs:element name="offset" nillable="true" type="xs:int"></xs:element>
+               </xs:sequence>
+            </xs:complexType>
+         </xs:element>
+         <xs:element name="PersonListParams" type="ns0:PersonListParams"></xs:element>
+         <xs:complexType name="PersonListParams">
+            <xs:sequence>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="PersonListParam" type="ns0:PersonListParam"></xs:element>
+            </xs:sequence>
+         </xs:complexType>
+         <xs:complexType name="PersonListParam">
+            <xs:sequence>
+               <xs:element name="search" nillable="true" type="xs:string"></xs:element>
+               <xs:element name="page" nillable="true" type="xs:integer"></xs:element>
+               <xs:element name="offset" nillable="true" type="xs:integer"></xs:element>
+               <xs:element ref="ns0:PersonListCounts"></xs:element>
+               <xs:element ref="ns0:PersonListDatas"></xs:element>
+            </xs:sequence>
+         </xs:complexType>
+      </xs:schema>
+      <xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://ws.wso2.org/dataservice">
+         <xs:element name="DataServiceFault">
+            <xs:complexType>
+               <xs:sequence>
+                  <xs:element name="current_params" type="xs:string"></xs:element>
+                  <xs:element name="current_request_name" type="xs:string"></xs:element>
+                  <xs:element name="nested_exception" type="xs:string"></xs:element>
+                  <xs:element name="source_data_service">
+                     <xs:complexType>
+                        <xs:sequence>
+                           <xs:element name="location" type="xs:string"></xs:element>
+                           <xs:element name="default_namespace" type="xs:string"></xs:element>
+                           <xs:element name="description" type="xs:string"></xs:element>
+                           <xs:element name="data_service_name" type="xs:string"></xs:element>
+                        </xs:sequence>
+                     </xs:complexType>
+                  </xs:element>
+                  <xs:element name="ds_code" type="xs:string"></xs:element>
+               </xs:sequence>
+            </xs:complexType>
+         </xs:element>
+         <xs:element name="REQUEST_STATUS" type="xs:string"></xs:element>
+         <xs:element name="DATA_SERVICE_RESPONSE">
+            <xs:complexType>
+               <xs:sequence>
+                  <xs:any minOccurs="0"></xs:any>
+               </xs:sequence>
+            </xs:complexType>
+         </xs:element>
+      </xs:schema>
+   </wsdl:types>
+   <wsdl:message name="person_list_countRequest">
+      <wsdl:part name="parameters" element="ns0:person_list_count"></wsdl:part>
+   </wsdl:message>
+   <wsdl:message name="person_list_countResponse">
+      <wsdl:part name="parameters" element="ns0:PersonListCounts"></wsdl:part>
+   </wsdl:message>
+   <wsdl:message name="DataServiceFault">
+      <wsdl:part name="parameters" element="ns1:DataServiceFault"></wsdl:part>
+   </wsdl:message>
+   <wsdl:message name="person_addRequest">
+      <wsdl:part name="parameters" element="ns0:person_add"></wsdl:part>
+   </wsdl:message>
+   <wsdl:message name="person_addResponse">
+      <wsdl:part name="parameters" element="ns0:PersonAddID"></wsdl:part>
+   </wsdl:message>
+   <wsdl:message name="person_view_by_idRequest">
+      <wsdl:part name="parameters" element="ns0:person_view_by_id"></wsdl:part>
+   </wsdl:message>
+   <wsdl:message name="person_view_by_idResponse">
+      <wsdl:part name="parameters" element="ns0:PersonViews"></wsdl:part>
+   </wsdl:message>
+   <wsdl:message name="person_list_searchRequest">
+      <wsdl:part name="parameters" element="ns0:person_list_search"></wsdl:part>
+   </wsdl:message>
+   <wsdl:message name="person_list_searchResponse">
+      <wsdl:part name="parameters" element="ns0:PersonListDatas"></wsdl:part>
+   </wsdl:message>
+   <wsdl:message name="get_pt_by_kodeRequest">
+      <wsdl:part name="parameters" element="ns0:get_pt_by_kode"></wsdl:part>
+   </wsdl:message>
+   <wsdl:message name="get_pt_by_kodeResponse">
+      <wsdl:part name="parameters" element="ns0:PTList"></wsdl:part>
+   </wsdl:message>
+   <wsdl:message name="person_listRequest">
+      <wsdl:part name="parameters" element="ns0:person_list"></wsdl:part>
+   </wsdl:message>
+   <wsdl:message name="person_listResponse">
+      <wsdl:part name="parameters" element="ns0:PersonListParams"></wsdl:part>
+   </wsdl:message>
+   <wsdl:message name="person_deleteRequest">
+      <wsdl:part name="parameters" element="ns0:person_delete"></wsdl:part>
+   </wsdl:message>
+   <wsdl:message name="person_deleteResponse">
+      <wsdl:part name="parameters" element="ns1:REQUEST_STATUS"></wsdl:part>
+   </wsdl:message>
+   <wsdl:message name="person_updateRequest">
+      <wsdl:part name="parameters" element="ns0:person_update"></wsdl:part>
+   </wsdl:message>
+   <wsdl:message name="person_updateResponse">
+      <wsdl:part name="parameters" element="ns1:REQUEST_STATUS"></wsdl:part>
+   </wsdl:message>
+   <wsdl:portType name="workshop_xmlPortType">
+      <wsdl:operation name="person_list_count">
+         <wsdl:input message="ns0:person_list_countRequest" wsaw:Action="urn:person_list_count"></wsdl:input>
+         <wsdl:output message="ns0:person_list_countResponse" wsaw:Action="urn:person_list_countResponse"></wsdl:output>
+         <wsdl:fault message="ns0:DataServiceFault" name="DataServiceFault" wsaw:Action="urn:person_list_countDataServiceFault"></wsdl:fault>
+      </wsdl:operation>
+      <wsdl:operation name="person_add">
+         <wsdl:input message="ns0:person_addRequest" wsaw:Action="urn:person_add"></wsdl:input>
+         <wsdl:output message="ns0:person_addResponse" wsaw:Action="urn:person_addResponse"></wsdl:output>
+         <wsdl:fault message="ns0:DataServiceFault" name="DataServiceFault" wsaw:Action="urn:person_addDataServiceFault"></wsdl:fault>
+      </wsdl:operation>
+      <wsdl:operation name="person_view_by_id">
+         <wsdl:input message="ns0:person_view_by_idRequest" wsaw:Action="urn:person_view_by_id"></wsdl:input>
+         <wsdl:output message="ns0:person_view_by_idResponse" wsaw:Action="urn:person_view_by_idResponse"></wsdl:output>
+         <wsdl:fault message="ns0:DataServiceFault" name="DataServiceFault" wsaw:Action="urn:person_view_by_idDataServiceFault"></wsdl:fault>
+      </wsdl:operation>
+      <wsdl:operation name="person_list_search">
+         <wsdl:input message="ns0:person_list_searchRequest" wsaw:Action="urn:person_list_search"></wsdl:input>
+         <wsdl:output message="ns0:person_list_searchResponse" wsaw:Action="urn:person_list_searchResponse"></wsdl:output>
+         <wsdl:fault message="ns0:DataServiceFault" name="DataServiceFault" wsaw:Action="urn:person_list_searchDataServiceFault"></wsdl:fault>
+      </wsdl:operation>
+      <wsdl:operation name="get_pt_by_kode">
+         <wsdl:documentation>Get PT by Kode PT                                     </wsdl:documentation>
+         <wsdl:input message="ns0:get_pt_by_kodeRequest" wsaw:Action="urn:get_pt_by_kode"></wsdl:input>
+         <wsdl:output message="ns0:get_pt_by_kodeResponse" wsaw:Action="urn:get_pt_by_kodeResponse"></wsdl:output>
+         <wsdl:fault message="ns0:DataServiceFault" name="DataServiceFault" wsaw:Action="urn:get_pt_by_kodeDataServiceFault"></wsdl:fault>
+      </wsdl:operation>
+      <wsdl:operation name="person_list">
+         <wsdl:input message="ns0:person_listRequest" wsaw:Action="urn:person_list"></wsdl:input>
+         <wsdl:output message="ns0:person_listResponse" wsaw:Action="urn:person_listResponse"></wsdl:output>
+         <wsdl:fault message="ns0:DataServiceFault" name="DataServiceFault" wsaw:Action="urn:person_listDataServiceFault"></wsdl:fault>
+      </wsdl:operation>
+      <wsdl:operation name="person_delete">
+         <wsdl:input message="ns0:person_deleteRequest" wsaw:Action="urn:person_delete"></wsdl:input>
+         <wsdl:output message="ns0:person_deleteResponse" wsaw:Action="urn:person_deleteResponse"></wsdl:output>
+         <wsdl:fault message="ns0:DataServiceFault" name="DataServiceFault" wsaw:Action="urn:person_deleteDataServiceFault"></wsdl:fault>
+      </wsdl:operation>
+      <wsdl:operation name="person_update">
+         <wsdl:input message="ns0:person_updateRequest" wsaw:Action="urn:person_update"></wsdl:input>
+         <wsdl:output message="ns0:person_updateResponse" wsaw:Action="urn:person_updateResponse"></wsdl:output>
+         <wsdl:fault message="ns0:DataServiceFault" name="DataServiceFault" wsaw:Action="urn:person_updateDataServiceFault"></wsdl:fault>
+      </wsdl:operation>
+   </wsdl:portType>
+   <wsdl:binding name="workshop_xmlSoap11Binding" type="ns0:workshop_xmlPortType">
+      <wsp:PolicyReference xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" URI="#UTOverTransport"></wsp:PolicyReference>
+      <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"></soap:binding>
+      <wsdl:operation name="person_list_count">
+         <soap:operation soapAction="urn:person_list_count" style="document"></soap:operation>
+         <wsdl:input>
+            <soap:body use="literal"></soap:body>
+         </wsdl:input>
+         <wsdl:output>
+            <soap:body use="literal"></soap:body>
+         </wsdl:output>
+         <wsdl:fault name="DataServiceFault">
+            <soap:fault use="literal" name="DataServiceFault"></soap:fault>
+         </wsdl:fault>
+      </wsdl:operation>
+      <wsdl:operation name="person_add">
+         <soap:operation soapAction="urn:person_add" style="document"></soap:operation>
+         <wsdl:input>
+            <soap:body use="literal"></soap:body>
+         </wsdl:input>
+         <wsdl:output>
+            <soap:body use="literal"></soap:body>
+         </wsdl:output>
+         <wsdl:fault name="DataServiceFault">
+            <soap:fault use="literal" name="DataServiceFault"></soap:fault>
+         </wsdl:fault>
+      </wsdl:operation>
+      <wsdl:operation name="person_view_by_id">
+         <soap:operation soapAction="urn:person_view_by_id" style="document"></soap:operation>
+         <wsdl:input>
+            <soap:body use="literal"></soap:body>
+         </wsdl:input>
+         <wsdl:output>
+            <soap:body use="literal"></soap:body>
+         </wsdl:output>
+         <wsdl:fault name="DataServiceFault">
+            <soap:fault use="literal" name="DataServiceFault"></soap:fault>
+         </wsdl:fault>
+      </wsdl:operation>
+      <wsdl:operation name="person_list_search">
+         <soap:operation soapAction="urn:person_list_search" style="document"></soap:operation>
+         <wsdl:input>
+            <soap:body use="literal"></soap:body>
+         </wsdl:input>
+         <wsdl:output>
+            <soap:body use="literal"></soap:body>
+         </wsdl:output>
+         <wsdl:fault name="DataServiceFault">
+            <soap:fault use="literal" name="DataServiceFault"></soap:fault>
+         </wsdl:fault>
+      </wsdl:operation>
+      <wsdl:operation name="get_pt_by_kode">
+         <soap:operation soapAction="urn:get_pt_by_kode" style="document"></soap:operation>
+         <wsdl:input>
+            <soap:body use="literal"></soap:body>
+         </wsdl:input>
+         <wsdl:output>
+            <soap:body use="literal"></soap:body>
+         </wsdl:output>
+         <wsdl:fault name="DataServiceFault">
+            <soap:fault use="literal" name="DataServiceFault"></soap:fault>
+         </wsdl:fault>
+      </wsdl:operation>
+      <wsdl:operation name="person_list">
+         <soap:operation soapAction="urn:person_list" style="document"></soap:operation>
+         <wsdl:input>
+            <soap:body use="literal"></soap:body>
+         </wsdl:input>
+         <wsdl:output>
+            <soap:body use="literal"></soap:body>
+         </wsdl:output>
+         <wsdl:fault name="DataServiceFault">
+            <soap:fault use="literal" name="DataServiceFault"></soap:fault>
+         </wsdl:fault>
+      </wsdl:operation>
+      <wsdl:operation name="person_delete">
+         <soap:operation soapAction="urn:person_delete" style="document"></soap:operation>
+         <wsdl:input>
+            <soap:body use="literal"></soap:body>
+         </wsdl:input>
+         <wsdl:output>
+            <soap:body use="literal"></soap:body>
+         </wsdl:output>
+         <wsdl:fault name="DataServiceFault">
+            <soap:fault use="literal" name="DataServiceFault"></soap:fault>
+         </wsdl:fault>
+      </wsdl:operation>
+      <wsdl:operation name="person_update">
+         <soap:operation soapAction="urn:person_update" style="document"></soap:operation>
+         <wsdl:input>
+            <soap:body use="literal"></soap:body>
+         </wsdl:input>
+         <wsdl:output>
+            <soap:body use="literal"></soap:body>
+         </wsdl:output>
+         <wsdl:fault name="DataServiceFault">
+            <soap:fault use="literal" name="DataServiceFault"></soap:fault>
+         </wsdl:fault>
+      </wsdl:operation>
+   </wsdl:binding>
+   <wsdl:binding name="workshop_xmlSoap12Binding" type="ns0:workshop_xmlPortType">
+      <wsp:PolicyReference xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" URI="#UTOverTransport"></wsp:PolicyReference>
+      <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"></soap12:binding>
+      <wsdl:operation name="person_list_count">
+         <soap12:operation soapAction="urn:person_list_count" style="document"></soap12:operation>
+         <wsdl:input>
+            <soap12:body use="literal"></soap12:body>
+         </wsdl:input>
+         <wsdl:output>
+            <soap12:body use="literal"></soap12:body>
+         </wsdl:output>
+         <wsdl:fault name="DataServiceFault">
+            <soap12:fault use="literal" name="DataServiceFault"></soap12:fault>
+         </wsdl:fault>
+      </wsdl:operation>
+      <wsdl:operation name="person_add">
+         <soap12:operation soapAction="urn:person_add" style="document"></soap12:operation>
+         <wsdl:input>
+            <soap12:body use="literal"></soap12:body>
+         </wsdl:input>
+         <wsdl:output>
+            <soap12:body use="literal"></soap12:body>
+         </wsdl:output>
+         <wsdl:fault name="DataServiceFault">
+            <soap12:fault use="literal" name="DataServiceFault"></soap12:fault>
+         </wsdl:fault>
+      </wsdl:operation>
+      <wsdl:operation name="person_view_by_id">
+         <soap12:operation soapAction="urn:person_view_by_id" style="document"></soap12:operation>
+         <wsdl:input>
+            <soap12:body use="literal"></soap12:body>
+         </wsdl:input>
+         <wsdl:output>
+            <soap12:body use="literal"></soap12:body>
+         </wsdl:output>
+         <wsdl:fault name="DataServiceFault">
+            <soap12:fault use="literal" name="DataServiceFault"></soap12:fault>
+         </wsdl:fault>
+      </wsdl:operation>
+      <wsdl:operation name="person_list_search">
+         <soap12:operation soapAction="urn:person_list_search" style="document"></soap12:operation>
+         <wsdl:input>
+            <soap12:body use="literal"></soap12:body>
+         </wsdl:input>
+         <wsdl:output>
+            <soap12:body use="literal"></soap12:body>
+         </wsdl:output>
+         <wsdl:fault name="DataServiceFault">
+            <soap12:fault use="literal" name="DataServiceFault"></soap12:fault>
+         </wsdl:fault>
+      </wsdl:operation>
+      <wsdl:operation name="get_pt_by_kode">
+         <soap12:operation soapAction="urn:get_pt_by_kode" style="document"></soap12:operation>
+         <wsdl:input>
+            <soap12:body use="literal"></soap12:body>
+         </wsdl:input>
+         <wsdl:output>
+            <soap12:body use="literal"></soap12:body>
+         </wsdl:output>
+         <wsdl:fault name="DataServiceFault">
+            <soap12:fault use="literal" name="DataServiceFault"></soap12:fault>
+         </wsdl:fault>
+      </wsdl:operation>
+      <wsdl:operation name="person_list">
+         <soap12:operation soapAction="urn:person_list" style="document"></soap12:operation>
+         <wsdl:input>
+            <soap12:body use="literal"></soap12:body>
+         </wsdl:input>
+         <wsdl:output>
+            <soap12:body use="literal"></soap12:body>
+         </wsdl:output>
+         <wsdl:fault name="DataServiceFault">
+            <soap12:fault use="literal" name="DataServiceFault"></soap12:fault>
+         </wsdl:fault>
+      </wsdl:operation>
+      <wsdl:operation name="person_delete">
+         <soap12:operation soapAction="urn:person_delete" style="document"></soap12:operation>
+         <wsdl:input>
+            <soap12:body use="literal"></soap12:body>
+         </wsdl:input>
+         <wsdl:output>
+            <soap12:body use="literal"></soap12:body>
+         </wsdl:output>
+         <wsdl:fault name="DataServiceFault">
+            <soap12:fault use="literal" name="DataServiceFault"></soap12:fault>
+         </wsdl:fault>
+      </wsdl:operation>
+      <wsdl:operation name="person_update">
+         <soap12:operation soapAction="urn:person_update" style="document"></soap12:operation>
+         <wsdl:input>
+            <soap12:body use="literal"></soap12:body>
+         </wsdl:input>
+         <wsdl:output>
+            <soap12:body use="literal"></soap12:body>
+         </wsdl:output>
+         <wsdl:fault name="DataServiceFault">
+            <soap12:fault use="literal" name="DataServiceFault"></soap12:fault>
+         </wsdl:fault>
+      </wsdl:operation>
+   </wsdl:binding>
+   <wsdl:binding name="workshop_xmlHttpBinding" type="ns0:workshop_xmlPortType">
+      <http:binding verb="POST"></http:binding>
+      <wsdl:operation name="person_list_count">
+         <http:operation location="person_list_count"></http:operation>
+         <wsdl:input>
+            <mime:content type="text/xml" part="parameters"></mime:content>
+         </wsdl:input>
+         <wsdl:output>
+            <mime:content type="text/xml" part="parameters"></mime:content>
+         </wsdl:output>
+      </wsdl:operation>
+      <wsdl:operation name="person_add">
+         <http:operation location="person_add"></http:operation>
+         <wsdl:input>
+            <mime:content type="text/xml" part="parameters"></mime:content>
+         </wsdl:input>
+         <wsdl:output>
+            <mime:content type="text/xml" part="parameters"></mime:content>
+         </wsdl:output>
+      </wsdl:operation>
+      <wsdl:operation name="person_view_by_id">
+         <http:operation location="person_view_by_id"></http:operation>
+         <wsdl:input>
+            <mime:content type="text/xml" part="parameters"></mime:content>
+         </wsdl:input>
+         <wsdl:output>
+            <mime:content type="text/xml" part="parameters"></mime:content>
+         </wsdl:output>
+      </wsdl:operation>
+      <wsdl:operation name="person_list_search">
+         <http:operation location="person_list_search"></http:operation>
+         <wsdl:input>
+            <mime:content type="text/xml" part="parameters"></mime:content>
+         </wsdl:input>
+         <wsdl:output>
+            <mime:content type="text/xml" part="parameters"></mime:content>
+         </wsdl:output>
+      </wsdl:operation>
+      <wsdl:operation name="get_pt_by_kode">
+         <http:operation location="get_pt_by_kode"></http:operation>
+         <wsdl:input>
+            <mime:content type="text/xml" part="parameters"></mime:content>
+         </wsdl:input>
+         <wsdl:output>
+            <mime:content type="text/xml" part="parameters"></mime:content>
+         </wsdl:output>
+      </wsdl:operation>
+      <wsdl:operation name="person_list">
+         <http:operation location="person_list"></http:operation>
+         <wsdl:input>
+            <mime:content type="text/xml" part="parameters"></mime:content>
+         </wsdl:input>
+         <wsdl:output>
+            <mime:content type="text/xml" part="parameters"></mime:content>
+         </wsdl:output>
+      </wsdl:operation>
+      <wsdl:operation name="person_delete">
+         <http:operation location="person_delete"></http:operation>
+         <wsdl:input>
+            <mime:content type="text/xml" part="parameters"></mime:content>
+         </wsdl:input>
+         <wsdl:output>
+            <mime:content type="text/xml" part="parameters"></mime:content>
+         </wsdl:output>
+      </wsdl:operation>
+      <wsdl:operation name="person_update">
+         <http:operation location="person_update"></http:operation>
+         <wsdl:input>
+            <mime:content type="text/xml" part="parameters"></mime:content>
+         </wsdl:input>
+         <wsdl:output>
+            <mime:content type="text/xml" part="parameters"></mime:content>
+         </wsdl:output>
+      </wsdl:operation>
+   </wsdl:binding>
+   <wsdl:service name="workshop_xml">
+      <wsdl:port name="workshop_xmlHttpsSoap11Endpoint" binding="ns0:workshop_xmlSoap11Binding">
+         <soap:address location="https://Tasira-muharihar.local:8243/services/workshop_xml.workshop_xmlHttpsSoap11Endpoint"></soap:address>
+      </wsdl:port>
+      <wsdl:port name="workshop_xmlHttpsSoap12Endpoint" binding="ns0:workshop_xmlSoap12Binding">
+         <soap12:address location="https://Tasira-muharihar.local:8243/services/workshop_xml.workshop_xmlHttpsSoap12Endpoint"></soap12:address>
+      </wsdl:port>
+      <wsdl:port name="workshop_xmlHttpsEndpoint" binding="ns0:workshop_xmlHttpBinding">
+         <http:address location="https://Tasira-muharihar.local:8243/services/workshop_xml.workshop_xmlHttpsEndpoint"></http:address>
+      </wsdl:port>
+   </wsdl:service>
+</wsdl:definitions>
