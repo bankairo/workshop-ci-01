@@ -13,7 +13,7 @@ Credit
 - AdminLTE ( https://almsaeedstudio.com/ )
 - Public Data from forlap.dikti.go.id
 - WSO2 DSS ( http://wso2.com/products/data-services-server/ )
-- WSO2 ESB ( wso2.com/products/enterprise-service-bus/ )
+- WSO2 ESB ( http://wso2.com/products/enterprise-service-bus/ )
 
 ###################
 About CodeIgniter
