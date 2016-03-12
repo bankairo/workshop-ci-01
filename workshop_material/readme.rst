@@ -1,6 +1,6 @@
-****
+**********
 Database Configuration
-***
+**********
 - `mysql -u root -p`
 - `mysql> create database workshop`
 - `mysql> create user 'workshop'@'localhost' identified by 'workshop'`
