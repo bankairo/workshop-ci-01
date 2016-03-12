@@ -30,15 +30,7 @@
          </wsp:All>
       </wsp:ExactlyOne>
    </wsp:Policy>
-   <wsdl:documentation>Service Workshop
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                </wsdl:documentation>
+   <wsdl:documentation>Service Workshop</wsdl:documentation>
    <wsdl:types>
       <xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://ws.unlam.ac.id">
          <xs:element name="person_delete">
@@ -597,13 +589,13 @@
    </wsdl:binding>
    <wsdl:service name="workshop_xml">
       <wsdl:port name="workshop_xmlHttpsSoap11Endpoint" binding="ns0:workshop_xmlSoap11Binding">
-         <soap:address location="https://Tasira-muharihar.local:8243/services/workshop_xml.workshop_xmlHttpsSoap11Endpoint"></soap:address>
+         <soap:address location="https://localhost:8243/services/workshop_xml.workshop_xmlHttpsSoap11Endpoint"></soap:address>
       </wsdl:port>
       <wsdl:port name="workshop_xmlHttpsSoap12Endpoint" binding="ns0:workshop_xmlSoap12Binding">
-         <soap12:address location="https://Tasira-muharihar.local:8243/services/workshop_xml.workshop_xmlHttpsSoap12Endpoint"></soap12:address>
+         <soap12:address location="https://localhost:8243/services/workshop_xml.workshop_xmlHttpsSoap12Endpoint"></soap12:address>
       </wsdl:port>
       <wsdl:port name="workshop_xmlHttpsEndpoint" binding="ns0:workshop_xmlHttpBinding">
-         <http:address location="https://Tasira-muharihar.local:8243/services/workshop_xml.workshop_xmlHttpsEndpoint"></http:address>
+         <http:address location="https://localhost:8243/services/workshop_xml.workshop_xmlHttpsEndpoint"></http:address>
       </wsdl:port>
    </wsdl:service>
 </wsdl:definitions>
