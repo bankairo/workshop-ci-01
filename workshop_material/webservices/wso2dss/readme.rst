@@ -6,4 +6,4 @@ WSO2 Data Service Server Configuration
 - `Download MySQL JDBC ( https://dev.mysql.com/downloads/connector/j/ )`
 - `Follow JDBC Installation Guide ( https://docs.wso2.com/display/DSS350/Configuring+an+RDBMS+Datasource )`
 - `Copy workshop.dbs to [wso2dss path]/repository/deployment/server/dataservices`
-- `Edit workhop.dbs connection with your database configuration`
+- `Edit workshop.dbs connection with your database configuration`
